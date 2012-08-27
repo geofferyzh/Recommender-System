@@ -1,4 +1,4 @@
-package pymk_stage2;
+
 
 import java.io.IOException;
 import java.util.*;
@@ -17,11 +17,9 @@ public class pymk2_mapper extends MapReduceBase implements
       OutputCollector<Text, Text> output, Reporter reporter)
       throws IOException {
       String[] s = value.toString().split("\t");
-      String[] vs = s[1].split("(?<!\\\\),"); 
+      String[] vs = s[1].split(","); 
       List<String> vlist = Arrays.asList(vs);   
-//      for (String v : vlist) {
-// 	  output.collect(new Text(s[0] + "," + v), new IntWritable(1));
-//    }
+
       for (int i=0; i < vlist.size(); i++) {
       	output.collect(new Text(s[0] + "," + vlist.get(i)), new Text("1stD"));
 	for (int j= i+1; j < vlist.size(); j++) {
